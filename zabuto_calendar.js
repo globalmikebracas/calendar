@@ -275,7 +275,7 @@ $.fn.zabuto_calendar = function (options) {
                         var dateId = $calendarElement.attr('id') + '_' + dateAsString(year, month, currDayOfMonth);
                         var dayId = dateId + '_day';
 
-                        var $dayElement = $('<div id="' + dayId + '" class="day" >' + currDayOfMonth + '</div>');
+                        var $dayElement = $('<a id="' + dayId + '" class="day" >' + currDayOfMonth + '</a>');
                         $dayElement.data('day', currDayOfMonth);
 
                         if ($calendarElement.data('showToday') === true) {
@@ -415,11 +415,14 @@ $.fn.zabuto_calendar = function (options) {
                         $dowElement.attr('title', value.title);
                     }
 
+                    if (typeof(value.link) !== 'undefined') {
+                        $dayElement.attr('href', value.link);
+                    }
                     if (typeof(value.classname) === 'undefined') {
                         $dowElement.addClass('event');
                     } else {
                         $dowElement.addClass('event-styled');
-                        $dayElement.addClass(value.classname);
+                        $dayElement.css('color', value.classname);
                     }
 
                     if (typeof(value.badge) !== 'undefined' && value.badge !== false) {
