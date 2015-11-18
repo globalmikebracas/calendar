@@ -215,11 +215,21 @@ $.fn.zabuto_calendar = function (options) {
                 drawTable($calendarElement, $tableObj, dateInitObj.getFullYear(), dateInitObj.getMonth());
             });
 
+
             var $currMonthCell = $('<th colspan="5"></th>');
+
+            if (prevIsValid === false && nextIsValid === false)$currMonthCell = $('<th colspan="7"></th>');
+
             $currMonthCell.append($currMonthLabel);
 
             var $monthHeaderRow = $('<tr class="calendar-month-header"></tr>');
-            $monthHeaderRow.append($prevMonthCell, $currMonthCell, $nextMonthCell);
+
+            //sustituye
+            if (prevIsValid !== false)$monthHeaderRow.append($prevMonthCell);
+            $monthHeaderRow.append($currMonthCell);
+            if (nextIsValid !== false)$monthHeaderRow.append($nextMonthCell);
+
+            //$monthHeaderRow.append($prevMonthCell, $currMonthCell, $nextMonthCell);
 
             $tableObj.append($monthHeaderRow);
             return $tableObj;
